@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Station
+    uniqueID: 2524573217
+    locked: 0
+  - name: BattleGroup
+    uniqueID: 350748187
+    locked: 0
+  - name: Text
+    uniqueID: 4261737697
+    locked: 0

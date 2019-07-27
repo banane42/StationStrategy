@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - BattleGroup
+  - BGBtn
   layers:
   - Default
   - TransparentFX

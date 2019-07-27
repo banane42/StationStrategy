@@ -16,6 +16,11 @@ public class StationController : MonoBehaviour
 
     SpriteRenderer Renderer;
 
+    public enum StationType {
+        HomeBase, Dome
+    }
+    public StationType stationType;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -52,17 +57,19 @@ public class StationController : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (stationType == StationType.HomeBase) {
 
-        GameObject tempBG = Instantiate(battleGroupPrefab, transform.position, Quaternion.Euler(Vector3.zero));
+            GameObject tempBG = Instantiate(battleGroupPrefab , transform.position , Quaternion.Euler(Vector3.zero));
 
-        tempBG.GetComponent<BattleGroupController>().Initialize(gameObject, team, battleGroupsSpawned);
+            tempBG.GetComponent<BattleGroupController>().Initialize(gameObject , team , battleGroupsSpawned);
 
-        battleGroupsSpawned++;
+            battleGroupsSpawned++;
 
-        battleGroups.Add(tempBG);
+            battleGroups.Add(tempBG);
 
-        UIController.uic.SetStationTitle(name);
+        }
 
+        UIController.uic.StationClicked(this);
     }
 
 }

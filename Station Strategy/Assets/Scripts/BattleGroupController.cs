@@ -110,5 +110,9 @@ public class BattleGroupController : MonoBehaviour
 
     }
 
+    public Color GetColor() {
+        return Renderer.color;
+    }
+
 
 }

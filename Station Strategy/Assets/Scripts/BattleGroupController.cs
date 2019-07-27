@@ -87,7 +87,6 @@ public class BattleGroupController : MonoBehaviour
         if (collision.gameObject.CompareTag("BattleGroup"))
         {
 
-            Debug.Log("BattleGroups Enter!");
             touchingBattleGroups.Add(collision.gameObject);
 
         }
@@ -100,7 +99,6 @@ public class BattleGroupController : MonoBehaviour
         if (collision.gameObject.CompareTag("BattleGroup"))
         {
 
-            Debug.Log("BattleGroups Exit!");
             if (touchingBattleGroups.Contains(collision.gameObject))
             {
 

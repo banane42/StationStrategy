@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StationController : MonoBehaviour
 {
+    public string name;
+
     public GameObject[] stationConnections;
     public Vector3[] exits;
     public List<GameObject> battleGroups = new List<GameObject>();
@@ -51,7 +53,6 @@ public class StationController : MonoBehaviour
     private void OnMouseDown()
     {
 
-        Debug.Log("Spawning Station!");
         GameObject tempBG = Instantiate(battleGroupPrefab, transform.position, Quaternion.Euler(Vector3.zero));
 
         tempBG.GetComponent<BattleGroupController>().Initialize(gameObject, team, battleGroupsSpawned);
@@ -59,6 +60,8 @@ public class StationController : MonoBehaviour
         battleGroupsSpawned++;
 
         battleGroups.Add(tempBG);
+
+        UIController.uic.SetStationTitle(name);
 
     }
 

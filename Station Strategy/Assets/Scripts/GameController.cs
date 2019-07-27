@@ -14,8 +14,8 @@ public class GameController : MonoBehaviour
         if (gc != null)
         {
             Destroy(gc);
-            gc = this;
         }
+        gc = this;
 
     }
 

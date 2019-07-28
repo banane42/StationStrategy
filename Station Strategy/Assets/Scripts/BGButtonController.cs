@@ -26,7 +26,7 @@ public class BGButtonController : MonoBehaviour
 
     public void Pressed() {
 
-
+        print("I was pressed! " + BGController.tagNumber);
 
     }
 

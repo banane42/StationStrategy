@@ -13,8 +13,9 @@ public class BattleGroupController : MonoBehaviour
 
     TextMesh GroupName;
     SpriteRenderer Renderer;
+    bool isEngaged = false;
 
-    public List<GameObject> touchingBattleGroups = new List<GameObject>();
+    public List<BattleGroupController> touchingBattleGroups = new List<BattleGroupController>();
 
     void Awake()
     {
@@ -23,11 +24,6 @@ public class BattleGroupController : MonoBehaviour
 
         movePosition = transform.position;
 
-    }
-
-    private void Start()
-    {  
-        
     }
 
     //Call this every time a battle group is Instantiated
@@ -65,6 +61,7 @@ public class BattleGroupController : MonoBehaviour
 
     void Update()
     {
+        IsBattleGroupEngaged();
 
         //This is here due to a weird issue where dividing max speed by
         //touchingBattleGroups.Count + 1 gives back infinity. This is due to a weird 
@@ -73,10 +70,34 @@ public class BattleGroupController : MonoBehaviour
         int bgCount = touchingBattleGroups.Count + 1;
         float realSpeed = maxSpeed / bgCount;
 
-        if (transform.position != movePosition)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, movePosition, realSpeed * Time.deltaTime);
-            
+        if (transform.position != movePosition) {
+            transform.position = Vector2.MoveTowards(transform.position , movePosition , realSpeed * Time.deltaTime);
+
+        }
+        else if (!isEngaged) {
+
+            if (touchingBattleGroups.Count > 0) {
+
+                foreach (BattleGroupController bg in touchingBattleGroups) {
+
+                    Vector3 origin = (bg.transform.position + this.transform.position) / 2;
+
+                    //Prevents a bug where is the two battle groups are in the same exact position, nothing will happen.
+                    //So just move them slightly in a random direction
+                    if (origin == transform.position) {
+                        this.movePosition += new Vector3(0.01f * ((Random.Range(0,2) * 2) - 1), 0.01f * ((Random.Range(0 , 2) * 2) - 1));
+                    }
+
+                    Vector3 bgDir = (bg.transform.position - origin);
+                    bg.movePosition += bgDir * 0.1f;                  
+
+                    Vector3 thisDir = (this.transform.position - origin);
+                    this.movePosition += thisDir * 0.1f;
+
+                }
+
+            }
+
         }
 
     }
@@ -87,7 +108,7 @@ public class BattleGroupController : MonoBehaviour
         if (collision.gameObject.CompareTag("BattleGroup"))
         {
 
-            touchingBattleGroups.Add(collision.gameObject);
+            touchingBattleGroups.Add(collision.gameObject.GetComponent<BattleGroupController>());
 
         }
 
@@ -98,11 +119,11 @@ public class BattleGroupController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("BattleGroup"))
         {
-
-            if (touchingBattleGroups.Contains(collision.gameObject))
+            BattleGroupController tempBg = collision.gameObject.GetComponent<BattleGroupController>();
+            if (touchingBattleGroups.Contains(tempBg))
             {
 
-                touchingBattleGroups.Remove(collision.gameObject);
+                touchingBattleGroups.Remove(tempBg);
 
             }
 
@@ -114,5 +135,17 @@ public class BattleGroupController : MonoBehaviour
         return Renderer.color;
     }
 
+    void IsBattleGroupEngaged() {
 
+        foreach (BattleGroupController bg in touchingBattleGroups) {
+
+            if (bg.team != this.team) {
+                isEngaged = true;
+                return;
+            }
+
+        }
+
+        isEngaged = false;
+    }
 }

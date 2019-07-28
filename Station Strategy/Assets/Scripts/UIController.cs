@@ -41,11 +41,11 @@ public class UIController : MonoBehaviour
 
         int rowCount = 0;
         int colCount = 0;
-        foreach (GameObject bg in sc.battleGroups) {
+        foreach (BattleGroupController bg in sc.battleGroups) {
 
             GameObject tempBtn = Instantiate(BattleGroupBtnPrefab, MenuBackground.transform);
 
-            tempBtn.GetComponent<BGButtonController>().Initialize(bg.GetComponent<BattleGroupController>());
+            tempBtn.GetComponent<BGButtonController>().Initialize(bg);
 
             tempBtn.transform.position = new Vector3(tempBtn.transform.position.x + (50f * colCount), tempBtn.transform.position.y - (50f * rowCount), tempBtn.transform.position.z);
 

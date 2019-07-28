@@ -8,7 +8,7 @@ public class StationController : MonoBehaviour
 
     public GameObject[] stationConnections;
     public Vector3[] exits;
-    public List<GameObject> battleGroups = new List<GameObject>();
+    public List<BattleGroupController> battleGroups = new List<BattleGroupController>();
 
     public GameObject battleGroupPrefab;
     public Team team;
@@ -60,12 +60,12 @@ public class StationController : MonoBehaviour
         if (stationType == StationType.HomeBase) {
 
             GameObject tempBG = Instantiate(battleGroupPrefab , transform.position , Quaternion.Euler(Vector3.zero));
-
-            tempBG.GetComponent<BattleGroupController>().Initialize(gameObject , team , battleGroupsSpawned);
+            BattleGroupController tempBGC = tempBG.GetComponent<BattleGroupController>();
+            tempBGC.Initialize(gameObject , team , battleGroupsSpawned);
 
             battleGroupsSpawned++;
 
-            battleGroups.Add(tempBG);
+            battleGroups.Add(tempBGC);
 
         }
 

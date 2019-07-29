@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleGroupController : MonoBehaviour
 {
-    public GameObject parentStation;
+    public StationController parentStation;
     public Vector3 movePosition;
     public float maxSpeed = 1f;
     public int tagNumber;
@@ -27,7 +27,7 @@ public class BattleGroupController : MonoBehaviour
     }
 
     //Call this every time a battle group is Instantiated
-    public void Initialize(GameObject ps, Team team, int tagNum)
+    public void Initialize(StationController ps, Team team, int tagNum)
     {
 
         parentStation = ps;

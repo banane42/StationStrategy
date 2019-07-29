@@ -2,8 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Team {
+    Neutral, Team1, Team2, Team3
+}
+
 public class GameController : MonoBehaviour
 {
+    public enum ControlMode {
+        Unselected, UnitSelected
+    }
+    public ControlMode ctrlMode = ControlMode.Unselected;
+
+    public BattleGroupController CurrentSelectedBattleGroup;
 
     //Singleton instance
     public static GameController gc; 
@@ -19,15 +29,14 @@ public class GameController : MonoBehaviour
 
     }
 
-    void Start()
-    {
-        
+    private void FixedUpdate() {
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+
+            ctrlMode = ControlMode.Unselected;
+
+        }
+
     }
 
-    void Update()
-    {
-        
-    }
 }
-
-public enum Team { Neutral, Team1, Team2, Team3 }

@@ -9,6 +9,7 @@ public class StationController : MonoBehaviour
     public GameObject[] stationConnections;
     public Vector3[] exits;
     public List<BattleGroupController> battleGroups = new List<BattleGroupController>();
+    public Queue<Vector3> moveOrders = new Queue<Vector3>();
 
     public GameObject battleGroupPrefab;
     public Team team;
@@ -57,11 +58,25 @@ public class StationController : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (GameController.gc.ctrlMode == GameController.ControlMode.Unselected) {
+            UIController.uic.StationClicked(this);
+        }
+        else if (GameController.gc.ctrlMode == GameController.ControlMode.UnitSelected) {
+
+            GameController.gc.CurrentSelectedBattleGroup.movePosition = transform.position;
+            GameController.gc.ctrlMode = GameController.ControlMode.Unselected;
+
+        }
+        
+    }
+
+    public void SpawnBattleGroup() {
+
         if (stationType == StationType.HomeBase) {
 
             GameObject tempBG = Instantiate(battleGroupPrefab , transform.position , Quaternion.Euler(Vector3.zero));
             BattleGroupController tempBGC = tempBG.GetComponent<BattleGroupController>();
-            tempBGC.Initialize(gameObject , team , battleGroupsSpawned);
+            tempBGC.Initialize(this , team , battleGroupsSpawned);
 
             battleGroupsSpawned++;
 
@@ -69,7 +84,12 @@ public class StationController : MonoBehaviour
 
         }
 
-        UIController.uic.StationClicked(this);
+    }
+
+    public void MoveBattleGroup() {
+
+
+
     }
 
 }

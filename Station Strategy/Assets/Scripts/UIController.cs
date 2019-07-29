@@ -6,11 +6,14 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     public Text StationTitleTxt;
+    public Button SpawnBattleGroupBtn;
     public GameObject MenuBackground;
 
     public GameObject BattleGroupBtnPrefab;
 
     public static UIController uic;
+
+    StationController currentSelectedSc;
 
     void Awake()
     {
@@ -22,14 +25,23 @@ public class UIController : MonoBehaviour
 
     }
 
-    void FixedUpdate()
-    {
-        
-    }
-
     public void StationClicked(StationController sc) {
 
         StationTitleTxt.text = sc.name;
+        currentSelectedSc = sc;
+
+        if (sc.stationType == StationController.StationType.HomeBase) {
+            SpawnBattleGroupBtn.gameObject.SetActive(true);
+        }
+        else {
+            SpawnBattleGroupBtn.gameObject.SetActive(false);
+        }
+
+        RefreshBattleGroupButtons();
+
+    }
+
+    public void RefreshBattleGroupButtons() {
 
         foreach (Transform child in MenuBackground.transform) {
 
@@ -41,13 +53,13 @@ public class UIController : MonoBehaviour
 
         int rowCount = 0;
         int colCount = 0;
-        foreach (BattleGroupController bg in sc.battleGroups) {
+        foreach (BattleGroupController bg in currentSelectedSc.battleGroups) {
 
-            GameObject tempBtn = Instantiate(BattleGroupBtnPrefab, MenuBackground.transform);
+            GameObject tempBtn = Instantiate(BattleGroupBtnPrefab , MenuBackground.transform);
 
             tempBtn.GetComponent<BGButtonController>().Initialize(bg);
 
-            tempBtn.transform.position = new Vector3(tempBtn.transform.position.x + (50f * colCount), tempBtn.transform.position.y - (50f * rowCount), tempBtn.transform.position.z);
+            tempBtn.transform.position = new Vector3(tempBtn.transform.position.x + (50f * colCount) , tempBtn.transform.position.y - (50f * rowCount) , tempBtn.transform.position.z);
 
             colCount++;
             if (colCount > 4) {
@@ -55,6 +67,13 @@ public class UIController : MonoBehaviour
                 rowCount++;
             }
         }
+
+    }
+
+    public void SpawnBattleGroupBtnPressed() {
+
+        currentSelectedSc.SpawnBattleGroup();
+        RefreshBattleGroupButtons();
 
     }
 

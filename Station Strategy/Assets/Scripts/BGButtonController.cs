@@ -27,6 +27,8 @@ public class BGButtonController : MonoBehaviour
     public void Pressed() {
 
         print("I was pressed! " + BGController.tagNumber);
+        GameController.gc.ctrlMode = GameController.ControlMode.UnitSelected;
+        GameController.gc.CurrentSelectedBattleGroup = BGController;
 
     }
 

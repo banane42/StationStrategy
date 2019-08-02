@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class BattleGroupController : MonoBehaviour
     bool isEngaged = false;
 
     public List<BattleGroupController> touchingBattleGroups = new List<BattleGroupController>();
+    public Queue<Tuple<Vector3, StationController>> moveOrders = new Queue<Tuple<Vector3, StationController>>();
 
     void Awake()
     {
@@ -74,6 +76,21 @@ public class BattleGroupController : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position , movePosition , realSpeed * Time.deltaTime);
 
         }
+        else if (moveOrders.Count > 0)
+        {
+            Tuple<Vector3, StationController> move = moveOrders.Dequeue();
+
+            if (move.Item2 != null)
+            {
+
+                parentStation.battleGroups.Remove(this);
+                parentStation = move.Item2;
+                parentStation.battleGroups.Add(this);
+
+            }
+            
+            movePosition = move.Item1;
+        }
         else if (!isEngaged) {
 
             if (touchingBattleGroups.Count > 0) {
@@ -85,7 +102,7 @@ public class BattleGroupController : MonoBehaviour
                     //Prevents a bug where is the two battle groups are in the same exact position, nothing will happen.
                     //So just move them slightly in a random direction
                     if (origin == transform.position) {
-                        this.movePosition += new Vector3(0.01f * ((Random.Range(0,2) * 2) - 1), 0.01f * ((Random.Range(0 , 2) * 2) - 1));
+                        this.movePosition += new Vector3(0.01f * ((UnityEngine.Random.Range(0,2) * 2) - 1), 0.01f * ((UnityEngine.Random.Range(0 , 2) * 2) - 1));
                     }
 
                     Vector3 bgDir = (bg.transform.position - origin);

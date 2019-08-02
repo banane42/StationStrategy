@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +7,9 @@ public class StationController : MonoBehaviour
 {
     public string name;
 
-    public GameObject[] stationConnections;
+    public StationController[] stationConnections;
     public Vector3[] exits;
     public List<BattleGroupController> battleGroups = new List<BattleGroupController>();
-    public Queue<Vector3> moveOrders = new Queue<Vector3>();
 
     public GameObject battleGroupPrefab;
     public Team team;
@@ -63,8 +63,14 @@ public class StationController : MonoBehaviour
         }
         else if (GameController.gc.ctrlMode == GameController.ControlMode.UnitSelected) {
 
-            GameController.gc.CurrentSelectedBattleGroup.movePosition = transform.position;
+            //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //foreach (Tuple<Vector3, StationController> moves in GameController.gc.GetMoveOrders(GameController.gc.CurrentSelectedBattleGroup.parentStation,this, mousePos, new List<Tuple<Vector3, StationController>>()))
+            foreach (Tuple<Vector3, StationController> moves in GameController.gc.GetMoveOrders(GameController.gc.CurrentSelectedBattleGroup.parentStation, this, new List<Tuple<Vector3, StationController>>()))
+            {
+                GameController.gc.CurrentSelectedBattleGroup.moveOrders.Enqueue(moves);
+            }
             GameController.gc.ctrlMode = GameController.ControlMode.Unselected;
+            UIController.uic.StationClicked(this);
 
         }
         
@@ -83,12 +89,6 @@ public class StationController : MonoBehaviour
             battleGroups.Add(tempBGC);
 
         }
-
-    }
-
-    public void MoveBattleGroup() {
-
-
 
     }
 

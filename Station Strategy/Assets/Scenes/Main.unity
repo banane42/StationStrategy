@@ -216,9 +216,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Dome 2
   stationConnections:
-  - {fileID: 1260922653}
-  - {fileID: 1549602420}
-  - {fileID: 207263132}
+  - {fileID: 1665932820796333165}
+  - {fileID: 207263133}
+  - {fileID: 1549602423}
   exits:
   - {x: 2, y: 1.5, z: 0}
   - {x: 2.4, y: 0.7, z: 0}
@@ -277,9 +277,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Green Base
   stationConnections:
-  - {fileID: 2906339}
+  - {fileID: 2906342}
   exits:
-  - {x: 3.71, y: 2.18, z: 0}
+  - {x: 5.38, y: 3.84, z: 0}
   battleGroups: []
   battleGroupPrefab: {fileID: 643776238894499909, guid: 630013c5c4fc445279f92da2c933b5d4,
     type: 3}
@@ -410,9 +410,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Red Base
   stationConnections:
-  - {fileID: 1260922653}
+  - {fileID: 1665932820796333165}
   exits:
-  - {x: -3.78, y: 2.15, z: 0}
+  - {x: -5.39, y: 3.8, z: 0}
   battleGroups: []
   battleGroupPrefab: {fileID: 643776238894499909, guid: 630013c5c4fc445279f92da2c933b5d4,
     type: 3}
@@ -822,6 +822,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &709705562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 709705563}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &709705563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709705562}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.38, y: 3.84, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1036963787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Blue Base
   stationConnections:
-  - {fileID: 1549602420}
+  - {fileID: 1549602423}
   exits:
   - {x: 0, y: -5.75, z: 0}
   battleGroups: []
@@ -1275,12 +1305,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1260922653 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1665932819803863921, guid: 40038466d63faa144ad1303c69d5c2bb,
-    type: 3}
-  m_PrefabInstance: {fileID: 1665932820796333164}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1338452110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1443,9 +1467,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Dome 3
   stationConnections:
-  - {fileID: 1260922653}
-  - {fileID: 2906339}
-  - {fileID: 1122621241}
+  - {fileID: 1122621245}
+  - {fileID: 1665932820796333165}
+  - {fileID: 2906342}
   exits:
   - {x: 0.5, y: -1.7, z: 0}
   - {x: -0.6, y: -1.75, z: 0}
@@ -1946,12 +1970,12 @@ PrefabInstance:
         type: 3}
       propertyPath: stationConnections.Array.data[0]
       value: 
-      objectReference: {fileID: 2906339}
+      objectReference: {fileID: 2906342}
     - target: {fileID: 1665932819803863884, guid: 40038466d63faa144ad1303c69d5c2bb,
         type: 3}
       propertyPath: stationConnections.Array.data[1]
       value: 
-      objectReference: {fileID: 1549602420}
+      objectReference: {fileID: 1549602423}
     - target: {fileID: 1665932819803863884, guid: 40038466d63faa144ad1303c69d5c2bb,
         type: 3}
       propertyPath: name
@@ -1971,7 +1995,7 @@ PrefabInstance:
         type: 3}
       propertyPath: stationConnections.Array.data[2]
       value: 
-      objectReference: {fileID: 376320430}
+      objectReference: {fileID: 376320431}
     - target: {fileID: 1665932819803863884, guid: 40038466d63faa144ad1303c69d5c2bb,
         type: 3}
       propertyPath: exits.Array.data[2].x
@@ -1984,3 +2008,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40038466d63faa144ad1303c69d5c2bb, type: 3}
+--- !u!114 &1665932820796333165 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1665932819803863884, guid: 40038466d63faa144ad1303c69d5c2bb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1665932820796333164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa782783d3f9f487b8d0e2dced4ee3c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,6 +14,7 @@ public class BattleGroupController : MonoBehaviour
 
     TextMesh GroupName;
     SpriteRenderer Renderer;
+    public ParticleSystem ps;
     bool isEngaged = false;
 
     public List<BattleGroupController> touchingBattleGroups = new List<BattleGroupController>();
@@ -23,7 +24,7 @@ public class BattleGroupController : MonoBehaviour
     {
         Renderer = GetComponent<SpriteRenderer>();
         GroupName = transform.GetChild(0).GetComponent<TextMesh>();
-
+        
         movePosition = transform.position;
 
     }
@@ -117,6 +118,22 @@ public class BattleGroupController : MonoBehaviour
 
         }
 
+        if (isEngaged)
+        {
+            if (!ps.isPlaying)
+            {
+                ps.Play();
+            }
+        }
+        else
+        {
+            if (ps.isPlaying)
+            {
+                ps.Stop();
+            }
+            
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -145,6 +162,14 @@ public class BattleGroupController : MonoBehaviour
             }
 
         }
+
+    }
+
+    private void OnMouseDown()
+    {
+
+        GameController.gc.ctrlMode = GameController.ControlMode.UnitSelected;
+        GameController.gc.CurrentSelectedBattleGroup = this;
 
     }
 

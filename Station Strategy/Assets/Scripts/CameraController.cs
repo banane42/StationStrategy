@@ -18,11 +18,22 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        Camera.orthographicSize += -Input.GetAxis("Mouse ScrollWheel") * zoomSensitivity;
+        float scrollWheelVal = Input.GetAxis("Mouse ScrollWheel");
+        Camera.orthographicSize += -scrollWheelVal * zoomSensitivity;
 
         //Speed based on how zoomed in the camera is. More zoomed in, lower speed.
         float cameraSpeed = maxCameraSpeed * (Camera.orthographicSize / maxCameraSize);
+
+        //if (scrollWheelVal != 0f)
+        //{
+
+        //    Vector3 mouseCamDiff = (Camera.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+
+        //    transform.position = new Vector3((transform.position.x + mouseCamDiff.x) * (Camera.orthographicSize / maxCameraSize),
+        //                                     (transform.position.y + mouseCamDiff.y) * (Camera.orthographicSize / maxCameraSize),
+        //                                       -10f);
+
+        //}
 
         if (Camera.orthographicSize <= 1f) {
             Camera.orthographicSize = 1f;

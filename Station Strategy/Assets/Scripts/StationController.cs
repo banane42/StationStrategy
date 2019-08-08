@@ -63,9 +63,11 @@ public class StationController : MonoBehaviour
         }
         else if (GameController.gc.ctrlMode == GameController.ControlMode.UnitSelected) {
 
-            //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //foreach (Tuple<Vector3, StationController> moves in GameController.gc.GetMoveOrders(GameController.gc.CurrentSelectedBattleGroup.parentStation,this, mousePos, new List<Tuple<Vector3, StationController>>()))
-            foreach (Tuple<Vector3, StationController> moves in GameController.gc.GetMoveOrders(GameController.gc.CurrentSelectedBattleGroup.parentStation, this, new List<Tuple<Vector3, StationController>>()))
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 finalMove = new Vector3(mousePos.x, mousePos.y, 0f);
+
+            foreach (Tuple<Vector3, StationController> moves in GameController.gc.GetMoveOrders(GameController.gc.CurrentSelectedBattleGroup.parentStation, this, finalMove, new List<Tuple<Vector3, StationController>>()))
+                //foreach (Tuple<Vector3, StationController> moves in GameController.gc.GetMoveOrders(GameController.gc.CurrentSelectedBattleGroup.parentStation, this, new List<Tuple<Vector3, StationController>>()))
             {
                 GameController.gc.CurrentSelectedBattleGroup.moveOrders.Enqueue(moves);
             }
@@ -73,7 +75,10 @@ public class StationController : MonoBehaviour
             UIController.uic.StationClicked(this);
 
         }
-        
+
+        //Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //print("Station Click: " + mousePosWorld);
+
     }
 
     public void SpawnBattleGroup() {

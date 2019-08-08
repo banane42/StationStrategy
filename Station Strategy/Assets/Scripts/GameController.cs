@@ -40,9 +40,9 @@ public class GameController : MonoBehaviour
 
     }
 
-    //public List<Tuple<Vector3, StationController>> GetMoveOrders(StationController present, StationController end, Vector3 finalMove, List<Tuple<Vector3, StationController>> moves) {
-    public List<Tuple<Vector3, StationController>> GetMoveOrders(StationController present, StationController end, List<Tuple<Vector3, StationController>> moves)
+    public List<Tuple<Vector3, StationController>> GetMoveOrders(StationController present, StationController end, Vector3 finalMove, List<Tuple<Vector3, StationController>> moves)
     {
+        //public List<Tuple<Vector3, StationController>> GetMoveOrders(StationController present, StationController end, List<Tuple<Vector3, StationController>> moves){
 
         if (present != end)
         {
@@ -88,15 +88,15 @@ public class GameController : MonoBehaviour
             moves.Add(exitMove);
             moves.Add(entranceMove);
 
-            //return GetMoveOrders(nextTarget, end, finalMove, moves);
-            return GetMoveOrders(nextTarget, end, moves);
+            return GetMoveOrders(nextTarget, end, finalMove, moves);
+            //return GetMoveOrders(nextTarget, end, moves);
 
         }
         else
         {
 
-            //moves.Add(Tuple.Create<Vector3, StationController>(finalMove, null));
-            moves.Add(Tuple.Create<Vector3, StationController>(present.transform.position, null));
+            moves.Add(Tuple.Create<Vector3, StationController>(finalMove, end));
+            //moves.Add(Tuple.Create<Vector3, StationController>(present.transform.position, null));
             return moves;
 
         }

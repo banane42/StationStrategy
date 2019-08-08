@@ -35,6 +35,9 @@ public class CameraController : MonoBehaviour
 
         //}
 
+        //Vector3 mousePosWorld = Camera.ScreenToWorldPoint(Input.mousePosition);
+        //print(mousePosWorld);
+
         if (Camera.orthographicSize <= 1f) {
             Camera.orthographicSize = 1f;
         }
